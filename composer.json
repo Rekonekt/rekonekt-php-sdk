@@ -1,0 +1,20 @@
+{
+	"name" : "rekonekt/rekonekt-php-sdk",
+	"description" : "Rekonekt PHP SDK",
+	"authors" : [
+		{
+			"name" : "Rekonekt PHP SDK"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.0",
+		"lib-curl": "*",
+		"ext-json": "*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Rekonekt" : "src/"
+		}
+	},
+	"minimum-stability" : "stable"
+}
