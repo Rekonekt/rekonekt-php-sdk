@@ -80,6 +80,34 @@ class RekonektApi extends RekonektBaseApi{
 	}
 
 	/**
+	 * Create a new attachment object (this method does not upload)
+	 * @param string $filename Filename with extension
+	 * @param int $filesize File size in bytes
+	 * @return array
+	 */
+	public function createAttachment($filename, $filesize){
+		return $this->callPost('attachments/create', array(
+			'filename' => $filename,
+			'filesize' => (int)$filesize,
+		));
+	}
+
+	/**
+	 * Upload an attachment
+	 * @param int $attachmentId
+	 * @param string $actualFilePath Full path to a file that should be uploaded
+	 * @param string $mimeType
+	 * @param string $filename
+	 * @return array
+	 */
+	public function uploadAttachment($attachmentId, $actualFilePath, $mimeType, $filename){
+		$curlFile = curl_file_create($actualFilePath, $mimeType, $filename);
+		return $this->callPost('attachments/' . $attachmentId . '/upload', array(
+			'file' => $curlFile,
+		));
+	}
+
+	/**
 	 * Get value from session
 	 * @param string $key
 	 * @param mixed $default

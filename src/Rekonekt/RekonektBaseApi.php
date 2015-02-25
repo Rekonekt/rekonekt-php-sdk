@@ -38,6 +38,16 @@ class RekonektBaseApi{
 	}
 
 	/**
+	 * Set current
+	 * @param string $apiUrl
+	 * @return self
+	 */
+	public function setApiUrl($apiUrl){
+		$this->apiUrl = $apiUrl;
+		return $this;
+	}
+
+	/**
 	 * @param string $requestMethod
 	 * @param string $apiMethod
 	 * @param array $getData
@@ -86,9 +96,10 @@ class RekonektBaseApi{
 		curl_setopt($ch, CURLOPT_URL, $urlDomain);
 		curl_setopt($ch, CURLOPT_POST, $isPost ? 1 : 0);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
 
 		if($isPost){
-			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 		}
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
